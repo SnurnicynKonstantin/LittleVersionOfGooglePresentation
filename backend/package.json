@@ -1,0 +1,19 @@
+{
+  "name": "server-for-little-version-of-google-presentation",
+  "version": "1.0.0",
+  "description": "Server for little version of google presentation",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "pg": "^6.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
