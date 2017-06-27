@@ -1,6 +1,7 @@
 node_modules
 
-#dist folder
 dist
 
 .idea/
+
+npm-debug.log
