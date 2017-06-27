@@ -24,8 +24,7 @@ module.exports = function(app, db) {
         const query = db.query('SELECT * FROM presentations where subject = ($1) LIMIT 1', [request['subject']]);
 
         query.on('row', (row) => {
-            //TO-DO not stringify, do parse
-            result = JSON.stringify(row);
+            result = JSON.parse(JSON.stringify(row));
         });
 
         query.on('end', () => {
@@ -33,5 +32,17 @@ module.exports = function(app, db) {
             res.send(result);
         });
 
+    });
+
+    app.delete('/presentations/:subject', (req, res) => {
+        const request = req.params;
+        db.query('DELETE FROM items WHERE id=($1)', [request['subject']]);
+    });
+
+    app.put ('/presentations/:subject', (req, res) => {
+        const oldSubject = req.params['subject'];
+        const newSubject = req.body['subject']
+        db.query('UPDATE presentations SET subject=($1) WHERE subject=($3)',
+            [newSubject, oldSubject]);
     });
 };
