@@ -1,22 +1,10 @@
 import * as types from '../actions/actionTypes';
-/*import initialState from './initialState';*/
+import initialState from './initialState';
 
-export default function authorReducer(state = []/*initialState.authors*/, action) {
+export default function authorReducer(state = initialState.presentations, action) {
     switch (action.type) {
         case types.LOAD_PRESENTATIONS_SUCCESS:
-            return [
-                ...state,
-                {
-                    presentations: [
-                        {
-                            subject: 'presentation1'
-                        },
-                        {
-                            subject: 'presentation2'
-                        }
-                    ]
-                }
-            ]
+            return action.presentations;
 
         default:
             return state;

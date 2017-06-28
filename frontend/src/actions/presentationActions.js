@@ -10,9 +10,8 @@ export function loadPresentationsSuccess(presentations) {
 
 export function loadPresentations() {
     return function(dispatch) {
-        return presentationApi.getAllPresentations().then(presentations => {
-            console.log(presentations);
-            dispatch(loadPresentationsSuccess(presentations));
+        return presentationApi.getAllPresentations().then(res=>res.json()).then(res => {
+            dispatch(loadPresentationsSuccess(res.presentations));
         }).catch(error => {
             throw(error);
         });

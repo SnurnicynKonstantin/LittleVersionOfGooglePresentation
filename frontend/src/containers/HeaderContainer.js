@@ -3,7 +3,7 @@ import React , { PropTypes, Component } from 'react';
 class HeaderContainer extends Component {
 
     onGetBtnClick(e) {
-        console.log(this.props.actions.loadPresentations());
+        this.props.actions.loadPresentations();
     }
 
     render() {
