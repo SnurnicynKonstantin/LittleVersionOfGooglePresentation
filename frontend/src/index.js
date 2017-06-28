@@ -3,8 +3,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import {Provider} from 'react-redux';
 import { Router, browserHistory, Route } from 'react-router';
-import reducers from './reducers';
-import { createStore } from 'redux';
+import {loadPresentations} from './actions/presentationActions';
+import configureStore from './store/configureStore';
 import App from './containers/App';
 import PresentationsContainer from './containers/PresentationsContainer';
 import SlidesContainer from './containers/SlidesContainer';
@@ -12,7 +12,8 @@ import './styles/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 
-let store = createStore(reducers);
+const store = configureStore();
+store.dispatch(loadPresentations());
 
 render(
     <Provider store={store}>

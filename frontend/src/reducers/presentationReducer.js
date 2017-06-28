@@ -7,9 +7,14 @@ export default function authorReducer(state = []/*initialState.authors*/, action
             return [
                 ...state,
                 {
-                    id: action.id,
-                    text: action.text,
-                    completed: false
+                    presentations: [
+                        {
+                            subject: 'presentation1'
+                        },
+                        {
+                            subject: 'presentation2'
+                        }
+                    ]
                 }
             ]
 
