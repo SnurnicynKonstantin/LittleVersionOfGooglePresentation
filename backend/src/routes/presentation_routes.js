@@ -17,7 +17,25 @@ module.exports = function(app, db) {
         );
     });
 
-    app.get('/presentations/:subject', (req, res) => {
+    app.get('/presentations', (req, res) => {
+        var presentations = [];
+
+        const query = db.query('SELECT * FROM presentations');
+
+        query.on('row', (row) => {
+            presentations.push(JSON.parse(JSON.stringify(row)));
+        });
+
+        query.on('end', () => {
+            res.header("Access-Control-Allow-Origin",  "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+            res.send({presentations, success: true});
+        });
+
+    });
+
+    app.get('/presentation/:subject', (req, res) => {
         const request = req.params;
         var result = {};
 
@@ -34,12 +52,12 @@ module.exports = function(app, db) {
 
     });
 
-    app.delete('/presentations/:subject', (req, res) => {
+    app.delete('/presentation/:subject', (req, res) => {
         const request = req.params;
         db.query('DELETE FROM items WHERE id=($1)', [request['subject']]);
     });
 
-    app.put ('/presentations/:subject', (req, res) => {
+    app.put ('/presentation/:subject', (req, res) => {
         const oldSubject = req.params['subject'];
         const newSubject = req.body['subject']
         db.query('UPDATE presentations SET subject=($1) WHERE subject=($3)',
