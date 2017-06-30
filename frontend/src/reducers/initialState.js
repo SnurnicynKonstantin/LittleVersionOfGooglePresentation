@@ -1,4 +1,4 @@
 export default {
     presentations: [],
-    user: null
+    user: { }
 };

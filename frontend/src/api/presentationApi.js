@@ -4,7 +4,7 @@ class PresentationApi {
     static getAllPresentations() {
         return fetch(serverApi + '/presentations', {
             method: "GET"
-        })
+        });
     }
 }
 
