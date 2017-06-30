@@ -1,6 +1,7 @@
 import React , { Component, PropTypes } from 'react';
 import { GoogleLogin } from 'react-google-login-component';
 import LoginComponent from '../components/header/LoginComponent';
+import { Link } from 'react-router'
 
 class HeaderContainer extends React.Component {
 
@@ -27,6 +28,11 @@ class HeaderContainer extends React.Component {
                     <div className="navbar-header">
                         <p className="navbar-brand">Little version of google presentation</p>
                     </div>
+                    <ul className="nav navbar-nav">
+                        <li>
+                            <Link to="presentations/new">Create</Link>
+                        </li>
+                    </ul>
                         {/*<button className='btn' onClick={this.onGetBtnClick.bind(this)}>loadPresentations</button>*/}
                         {/*List my presentations*/}
                     <div id="navbar" className="navbar-collapse collapse">
