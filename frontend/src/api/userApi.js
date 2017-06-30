@@ -9,13 +9,12 @@ class UserApi {
     }
 
     static saveUserMail(mail) {
-        console.log({api:mail});
         return fetch(serverApi + '/users', {
             method: "POST",
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                "content-type": "application/x-www-form-urlencoded"
             },
-            body: JSON.stringify({mail: mail})
+            body: 'mail=' + mail
         });
     }
 }

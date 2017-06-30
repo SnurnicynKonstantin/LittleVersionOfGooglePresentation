@@ -4,9 +4,14 @@ module.exports = function(app, db) {
         //TO-DO: Unique title
         var request = req.body;
 
+        console.log(req.body);
+
         db.query('INSERT INTO presentations(subject, user_id) values($1, $2)',
                  [request['subject'], 1],
                  function(err, result) {
+                     res.header("Access-Control-Allow-Origin",  "*");
+                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                     res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
                      if (err) {
                          res.send({ error: 'There was an error saving data', success: false });
                      } else {

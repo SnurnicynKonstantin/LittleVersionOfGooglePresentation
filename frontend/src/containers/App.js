@@ -23,7 +23,6 @@ class App extends React.Component {
 }
 
 function mapStateToProps (state) {
-    console.log(state)
     return {
         user: state.users
     };

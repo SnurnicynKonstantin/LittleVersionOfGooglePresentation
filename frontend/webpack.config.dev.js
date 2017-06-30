@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 export default {
     debug: true,
