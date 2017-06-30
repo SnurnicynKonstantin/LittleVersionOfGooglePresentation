@@ -3,7 +3,6 @@ module.exports = function(app, db) {
         // Get user_mail, subject
         //TO-DO: Unique title
         var request = req.body;
-        console.log(request['user_mail']);
 
         db.query('INSERT INTO presentations(subject, user_id) values($1, $2)',
                  [request['subject'], 1],
