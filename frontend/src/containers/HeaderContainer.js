@@ -1,31 +1,40 @@
-import React , { PropTypes, Component } from 'react';
+import React , { Component, PropTypes } from 'react';
 import { GoogleLogin } from 'react-google-login-component';
-import { connect } from 'react-redux';
+import LoginComponent from '../components/header/LoginComponent';
 
-class HeaderContainer extends Component {
+class HeaderContainer extends React.Component {
+
+    static get propTypes() {
+        return {
+            userActions: PropTypes.func.isRequired,
+            actions: PropTypes.func.isRequired
+        };
+    }
 
     onGetBtnClick(e) {
         this.props.actions.loadPresentations();
     }
 
     responseGoogle (googleUser) {
-        var access_token = googleUser.getAuthResponse().access_token;
+        let access_token = googleUser.getAuthResponse().access_token;
         this.props.userActions.loadUserInfo(access_token);
     }
 
     render() {
         return (
-            <div>
-                <h1>Little version of google presentation</h1>
-                <button className='btn' onClick={this.onGetBtnClick.bind(this)}>loadPresentations</button>
-                {/*List my presentations*/}
-                <div>{this.props.user.given_name}</div>
-                <GoogleLogin socialId="974978258856-arqfdldlm48f2v0ghvmqn7cs3ld511jd.apps.googleusercontent.com"
-                             className="google-login"
-                             scope="profile"
-                             responseHandler={this.responseGoogle.bind(this)}
-                             buttonText="Login With Google"/>
-            </div>
+            <nav className="navbar navbar-inverse navbar-fixed-top">
+                <div className="container">
+                    <div className="navbar-header">
+                        <p className="navbar-brand">Little version of google presentation</p>
+                    </div>
+                        {/*<button className='btn' onClick={this.onGetBtnClick.bind(this)}>loadPresentations</button>*/}
+                        {/*List my presentations*/}
+                    <div id="navbar" className="navbar-collapse collapse">
+                        {/*<div>{this.props.user.given_name}</div>*/}
+                        <LoginComponent responseHandler={this.responseGoogle.bind(this)} user={this.props.user} />
+                    </div>
+                </div>
+            </nav>
         );
     }
 }

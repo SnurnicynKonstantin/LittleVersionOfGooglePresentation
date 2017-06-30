@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PresentationItem from '../components/presentation/PresentationItemComponent';
 
 class PresentationsContainer extends React.Component {
     render() {
-        var rows = [];
+        let rows = [];
         this.props.presentations.forEach(function(presentation) {
-            rows.push(<li>{presentation.subject}</li>);
+            let subject = presentation.subject;
+            rows.push(<div className="col-lg-4"><PresentationItem presentationSubject={subject} key={subject}/></div>);
         });
+
         return (
-            <div>
+            <div className="container">
                 <h1>Your presentations:</h1>
-                <ul>
-                    <li>Чебурашка</li>
+                <div className="row">
                     {rows}
-                </ul>
+                </div>
             </div>
         );
     }
@@ -22,7 +24,7 @@ class PresentationsContainer extends React.Component {
 function mapStateToProps (state) {
     return {
         presentations: state.presentations
-    }
+    };
 }
 
 export default connect(mapStateToProps)(PresentationsContainer);

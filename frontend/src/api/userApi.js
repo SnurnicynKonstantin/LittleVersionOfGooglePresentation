@@ -9,7 +9,6 @@ class UserApi {
     }
 
     static saveUserMail(mail) {
-        console.log({api:mail});
         return fetch(serverApi + '/users', {
             method: "POST",
             headers: {
