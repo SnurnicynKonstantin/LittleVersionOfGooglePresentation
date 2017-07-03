@@ -19,7 +19,7 @@ export default function authorReducer(state = initialState, action) {
                 ...state,
                 presentations: [
                     ...state.presentations,
-                    {subject:action.subject}
+                    action.presentation
                 ]
             }
             console.log('STATE', state);

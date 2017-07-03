@@ -18,13 +18,11 @@ class NewPresentationComponent extends Component {
     }
 
     handleSubmit(event) {
-        console.log('I am Here my friend');
-        console.log(this.state);
 
         const { dispatch } = this.props;
         const actions = bindActionCreators(presentationActions, dispatch);
 
-        actions.createPresentation(this.state.value, this.props.user.email);
+        actions.createPresentation(this.state.value, this.props.user.user.email);
         this.props.history.push('/presentations');
 
         event.preventDefault();

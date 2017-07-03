@@ -6,31 +6,47 @@ module.exports = function(app, db) {
 
         console.log(req.body);
 
-        db.query('INSERT INTO presentations(subject, user_id) values($1, $2)',
-                 [request['subject'], 1],
-                 function(err, result) {
-                     res.header("Access-Control-Allow-Origin",  "*");
-                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-                     res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-                     if (err) {
-                         res.send({ error: 'There was an error saving data', success: false });
-                     } else {
-                         res.send({ success: true });
-                     }
-                 }
+        const query = db.query('SELECT id FROM users WHERE mail = ($1)',
+            [request['user_mail']]
         );
+
+        query.on("row", function (row, result) {
+            result.addRow(row);
+            const userId = result.rows[0].id;
+            db.query('INSERT INTO presentations(subject, user_id) values($1, $2)',
+                     [request['subject'], userId],
+                     function(err, result) {
+                         if (err) {
+                             res.send({ error: 'There was an error saving data', success: false });
+                         } else {
+                             db.query('SELECT MAX(Id) FROM presentations',
+                                 function(err, result) {
+                                     res.header("Access-Control-Allow-Origin",  "*");
+                                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                                     res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+                                     res.send({
+                                         id: result.rows[0].max,
+                                         subject: request['subject'],
+                                         user_id: userId
+                                     });
+                                 });
+                         }
+                     }
+            );
+        });
     });
 
     app.get('/presentations', (req, res) => {
         var presentations = [];
 
-        const query = db.query('SELECT * FROM presentations');
+        const querySelectPresentations = db.query('SELECT * FROM presentations WHERE user_id = ($1)',
+            [req.param("user_id")]);
 
-        query.on('row', (row) => {
+        querySelectPresentations.on('row', (row) => {
             presentations.push(JSON.parse(JSON.stringify(row)));
         });
 
-        query.on('end', () => {
+        querySelectPresentations.on('end', () => {
             res.header("Access-Control-Allow-Origin",  "*");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");

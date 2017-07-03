@@ -1,8 +1,8 @@
 const serverApi = 'http://localhost:8000';
 
 class PresentationApi {
-    static getAllPresentations() {
-        return fetch(serverApi + '/presentations', {
+    static getAllPresentations(mail) {
+        return fetch(serverApi + '/presentations?user_id=' + mail, {
             method: "GET"
         });
     }
