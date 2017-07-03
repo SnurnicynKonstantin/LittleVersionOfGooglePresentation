@@ -12,8 +12,8 @@ class HeaderContainer extends React.Component {
         };
     }
 
-    onGetBtnClick(e) {
-        this.props.actions.loadPresentations();
+    onLogoutBtnClick(e) {
+       // this.props.userActions.logoutUser();
     }
 
     responseGoogle (googleUser) {
@@ -26,18 +26,20 @@ class HeaderContainer extends React.Component {
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <p className="navbar-brand">Little version of google presentation</p>
+                        <Link to={`/presentations/`}>
+                            <p className="navbar-brand">Little version of google presentation</p>
+                        </Link>
                     </div>
                     <ul className="nav navbar-nav">
                         <li>
-                            <Link to="presentations/new">Create</Link>
+                            <Link to="presentations/new">Create presentation</Link>
                         </li>
                     </ul>
-                        {/*<button className='btn' onClick={this.onGetBtnClick.bind(this)}>loadPresentations</button>*/}
-                        {/*List my presentations*/}
                     <div id="navbar" className="navbar-collapse collapse">
-                        {/*<div>{this.props.user.given_name}</div>*/}
-                        <LoginComponent responseHandler={this.responseGoogle.bind(this)} user={this.props.user} />
+                        <LoginComponent
+                            responseHandler={this.responseGoogle.bind(this)}
+                            user={this.props.user}
+                            logout={this.onLogoutBtnClick.bind(this)} />
                     </div>
                 </div>
             </nav>

@@ -1,13 +1,15 @@
 import React , { PropTypes, Component } from 'react';
+import { Link } from 'react-router'
 
 class PresentationItemComponent extends Component {
 
     render() {
         return (
-            <div className="well"><p>{this.props.presentationSubject}</p></div>
+            <Link to={`/presentations/${this.props.presentationInfo.id}`}>
+                <div className="well"><p>{this.props.presentationInfo.subject}</p></div>
+            </Link>
         );
     }
 }
-
 
 export default PresentationItemComponent;

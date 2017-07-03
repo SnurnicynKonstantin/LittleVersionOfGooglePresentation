@@ -14,7 +14,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();
-store.dispatch(loadPresentations());
+// store.dispatch(loadPresentations());
 
 render(
     <Provider store={store}>
@@ -23,7 +23,7 @@ render(
                 {/*<IndexRoute component={PresentationsContainer} />*/}
                 <Route path="presentations" component={PresentationsContainer} />
                 <Route path="presentations/new" component={NewPresentationComponent} />
-                <Route path="presentations/:subject" component={SlidesContainer} />
+                <Route path="presentations/:id" component={SlidesContainer} />
             </Route>
         </Router>
     </Provider>,

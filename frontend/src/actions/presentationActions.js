@@ -8,10 +8,9 @@ export function loadPresentationsSuccess(presentations) {
     };
 }
 
-export function loadPresentations() {
-    console.log('I am load Presentations');
+export function loadPresentations(mail) {
     return function(dispatch) {
-        return presentationApi.getAllPresentations().then(res=>res.json()).then(res => {
+        return presentationApi.getAllPresentations(mail).then(res=>res.json()).then(res => {
             dispatch(loadPresentationsSuccess(res.presentations));
         }).catch(error => {
             throw(error);
@@ -19,18 +18,17 @@ export function loadPresentations() {
     };
 }
 
-export function createPresentationsSuccess(subject) {
+export function createPresentationsSuccess(presentation) {
     return {
         type: types.CREATE_PRESENTATIONS_SUCCESS,
-        subject
+        presentation
     };
 }
 
 export function createPresentation(subject, mail) {
-    console.log('I am load createPresentation');
     return function(dispatch) {
         return presentationApi.createNewPresentation(subject, mail).then(res=>res.json()).then(res => {
-            dispatch(createPresentationsSuccess(subject));
+            dispatch(createPresentationsSuccess(res));
         }).catch(error => {
             throw(error);
         });

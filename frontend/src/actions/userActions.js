@@ -1,4 +1,5 @@
 import userApi from '../api/userApi';
+import {loadPresentations} from './presentationActions';
 import * as types from './actionTypes';
 
 export function updateUser(user) {
@@ -8,17 +9,25 @@ export function updateUser(user) {
     };
 }
 
+export function logoutUser() {
+    return {
+        type: types.LOGOUT_USER
+    };
+}
+
 export function loadUserInfo(token) {
     return function(dispatch) {
         return userApi.getUserInfo(token).then(res=>res.json()).then(res => {
             dispatch(updateUser(res));
-            saveUse(res.email);
+            saveUser(res.email).then(res=>res.json()).then(res => {
+                dispatch(loadPresentations(res.user_id));
+            });
         }).catch(error => {
             throw(error);
         });
     };
 }
 
-export function saveUse(mail) {
-    userApi.saveUserMail(mail);
+export function saveUser(mail) {
+    return userApi.saveUserMail(mail);
 }
