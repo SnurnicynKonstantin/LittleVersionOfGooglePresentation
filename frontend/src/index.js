@@ -23,7 +23,7 @@ render(
                 {/*<IndexRoute component={PresentationsContainer} />*/}
                 <Route path="presentations" component={PresentationsContainer} />
                 <Route path="presentations/new" component={NewPresentationComponent} />
-                <Route path="presentations/:subject" component={SlidesContainer} />
+                <Route path="presentations/:id" component={SlidesContainer} />
             </Route>
         </Router>
     </Provider>,

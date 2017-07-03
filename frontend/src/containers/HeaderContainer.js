@@ -26,7 +26,9 @@ class HeaderContainer extends React.Component {
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container">
                     <div className="navbar-header">
-                        <p className="navbar-brand">Little version of google presentation</p>
+                        <Link to={`/presentations/`}>
+                            <p className="navbar-brand">Little version of google presentation</p>
+                        </Link>
                     </div>
                     <ul className="nav navbar-nav">
                         <li>

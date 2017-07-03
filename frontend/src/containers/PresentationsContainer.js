@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import PresentationItem from '../components/presentation/PresentationItemComponent';
 
 class PresentationsContainer extends React.Component {
+
     render() {
         let rows = [];
+
         this.props.presentations.presentations.forEach(function(presentation) {
-            let subject = presentation.subject;
-            rows.push(<div className="col-lg-4"><PresentationItem presentationSubject={subject} key={subject}/></div>);
+            rows.push(<div className="col-lg-4"><PresentationItem
+                presentationInfo={presentation}
+                key={presentation.id}
+            /></div>);
         });
 
         return (
