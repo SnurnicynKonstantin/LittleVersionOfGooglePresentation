@@ -9,6 +9,12 @@ export function updateUser(user) {
     };
 }
 
+export function logoutUser() {
+    return {
+        type: types.LOGOUT_USER
+    };
+}
+
 export function loadUserInfo(token) {
     return function(dispatch) {
         return userApi.getUserInfo(token).then(res=>res.json()).then(res => {

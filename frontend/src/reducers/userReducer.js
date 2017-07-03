@@ -15,6 +15,15 @@ export default function userReducer(state = initialState, action) {
             console.log('ADD_USER_INFO', result);
             return result;
 
+        case types.LOGOUT_USER:
+            var result = {
+                presentations: [],
+                user: {}
+            }
+            console.log('STATE', state);
+            console.log('LOGOUT_USER', result);
+            return result;
+
         default:
             return state;
     }

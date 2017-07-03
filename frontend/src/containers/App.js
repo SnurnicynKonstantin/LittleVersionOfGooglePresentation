@@ -5,7 +5,6 @@ import Header from './HeaderContainer';
 import * as presentationActions from '../actions/presentationActions';
 import * as userActions from '../actions/userActions';
 
-// import s from '../styles/scss/App.scss';
 require("!style-loader!css-loader!sass-loader!../styles/scss/App.scss");
 
 class App extends React.Component {
