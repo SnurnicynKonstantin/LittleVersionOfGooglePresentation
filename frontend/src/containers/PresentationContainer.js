@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PresentationItem from '../components/presentation/PresentationItemComponent';
 
-class PresentationsContainer extends React.Component {
+class PresentationContainer extends React.Component {
     render() {
         let rows = [];
         this.props.presentations.presentations.forEach(function(presentation) {
@@ -27,4 +27,4 @@ function mapStateToProps (state) {
     };
 }
 
-export default connect(mapStateToProps)(PresentationsContainer);
+export default connect(mapStateToProps)(PresentationContainer);

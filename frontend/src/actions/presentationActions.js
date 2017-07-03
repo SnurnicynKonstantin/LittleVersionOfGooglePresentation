@@ -9,7 +9,6 @@ export function loadPresentationsSuccess(presentations) {
 }
 
 export function loadPresentations() {
-    console.log('I am load Presentations');
     return function(dispatch) {
         return presentationApi.getAllPresentations().then(res=>res.json()).then(res => {
             dispatch(loadPresentationsSuccess(res.presentations));
@@ -27,7 +26,6 @@ export function createPresentationsSuccess(subject) {
 }
 
 export function createPresentation(subject, mail) {
-    console.log('I am load createPresentation');
     return function(dispatch) {
         return presentationApi.createNewPresentation(subject, mail).then(res=>res.json()).then(res => {
             dispatch(createPresentationsSuccess(subject));

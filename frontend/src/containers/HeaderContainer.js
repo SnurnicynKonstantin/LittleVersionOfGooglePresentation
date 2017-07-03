@@ -30,7 +30,7 @@ class HeaderContainer extends React.Component {
                     </div>
                     <ul className="nav navbar-nav">
                         <li>
-                            <Link to="presentations/new">Create</Link>
+                            <Link to="presentations/new">Create presentation</Link>
                         </li>
                     </ul>
                         {/*<button className='btn' onClick={this.onGetBtnClick.bind(this)}>loadPresentations</button>*/}

@@ -20,23 +20,16 @@ class NewPresentationComponent extends Component {
     handleSubmit(event) {
         console.log('I am Here my friend');
         console.log(this.state);
-        this.state.actions.createPresentation(this.state.value, this.props.user.email);
-        // const actions = bindActionCreators(presentationActions, dispatch);
-        // actions.createPresentation(this.state.value, this.props.user.email);
 
-        // presentationApi.createNewPresentation(this.state.value, this.props.user.email)
-        //     .then(res=>res.json()).then(res => {
-        //     console.log(res);
-        //     this.props.history.push('/presentations');
-        // }).catch(error => {
-        //     throw(error);
-        // });
+        const { dispatch } = this.props;
+        const actions = bindActionCreators(presentationActions, dispatch);
+
+        actions.createPresentation(this.state.value, this.props.user.email);
+        this.props.history.push('/presentations');
+
         event.preventDefault();
     }
     render() {
-        const { dispatch } = this.props;
-        const actions = bindActionCreators(presentationActions, dispatch);
-        this.setState({actions: actions});
 
         return (
             <div className="container">
