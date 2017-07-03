@@ -8,7 +8,7 @@ class LoginComponent extends Component {
         return (
             <ul className="nav navbar-nav navbar-right">
                 <li>
-                    <p>{userName}</p>
+                    <p className="user-name">{userName}</p>
                 </li>
                 <li>
                 <GoogleLogin socialId="974978258856-arqfdldlm48f2v0ghvmqn7cs3ld511jd.apps.googleusercontent.com"
