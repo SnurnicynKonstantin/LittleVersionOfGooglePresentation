@@ -5,22 +5,35 @@ class SlideView extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {value: '', actions: {}};
+
+        this.state = {
+            title: this.props.slide.title,
+            content: this.props.slide.content
+        };
 
         this.titleChange = this.titleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.contentChange = this.contentChange.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({title: this.props.slide.title});
+        this.setState({content: this.props.slide.content});
     }
 
     titleChange(event) {
-        this.setState({value: event.target.value});
+        console.log(event.target.value);
+        this.setState({title: event.target.value});
+        console.log('state', this.state);
     }
 
     contentChange(event) {
-        this.setState({value: event.target.value});
+        this.setState({content: event.target.value});
     }
 
     handleSubmit(event) {
-
+        this.props.changeSlideHandler(this.state.title, this.state.content, this.props.slide.id);
+        event.preventDefault();
     }
 
     render() {
@@ -34,7 +47,8 @@ class SlideView extends Component {
                             className="form-control"
                             id="subject"
                             placeholder="Title"
-                            value={this.props.slide.title}
+                            value={this.state.title}
+                            onChange={this.titleChange}
                         />
                     </div>
                     <div className="form-group">
@@ -44,7 +58,8 @@ class SlideView extends Component {
                             className="form-control"
                             id="subject"
                             placeholder="Content"
-                            value={this.props.slide.content}
+                            value={this.state.content}
+                            onChange={this.contentChange}
                         />
                     </div>
                     <input type="submit" className="btn btn-default" value="Change" />

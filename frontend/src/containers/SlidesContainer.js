@@ -10,16 +10,26 @@ class SlidesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {currentSlideId: 1};
+        let { dispatch } = this.props;
+        this.actions = bindActionCreators(slideActions, dispatch);
     }
 
     componentWillMount() {
-        let { dispatch } = this.props;
-        let actions = bindActionCreators(slideActions, dispatch);
-        actions.loadSlides(this.props.presentation.id);
+        this.actions.loadSlides(this.props.presentation.id);
     }
 
     changeCurrentSlideId(id) {
         this.setState({currentSlideId: id})
+    }
+
+    changeSlideHandler(title, content, id){
+        let data = {
+            title: title,
+            content: content,
+            slide_id: id,
+            presentation_id: this.props.presentation.id
+        };
+        this.actions.updateSlide(data);
     }
 
     render() {
@@ -35,9 +45,8 @@ class SlidesContainer extends React.Component {
             <div className="container">
                 <h1>{subject}</h1>
                 <div className="row">
-                    {/*<SlideList slides={this.props.presentation.slides}/>*/}
                     <SlideList slides={this.props.presentation.slides} changeSlideId={this.changeCurrentSlideId.bind(this)}/>
-                    <SlideView slide={currentSlide}/>
+                    <SlideView slide={currentSlide} changeSlideHandler={this.changeSlideHandler.bind(this)}/>
                 </div>
             </div>
         );
@@ -46,10 +55,6 @@ class SlidesContainer extends React.Component {
 
 function mapStateToProps (state, ownProps) {
     let presentationId = ownProps.params.id;
-
-    console.log("state in SlidesContainer", state.presentations.filter(function(elem) {
-        return elem.id == presentationId;
-    })[0]);
 
     return {
         presentation: state.presentations.filter(function(elem) {

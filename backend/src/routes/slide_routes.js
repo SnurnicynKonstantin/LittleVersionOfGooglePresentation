@@ -17,4 +17,27 @@ module.exports = function(app, db) {
         });
 
     });
+
+    app.put('/slides', (req, res) => {
+        var request = req.body;
+        console.log(request);
+
+        let presentationId = request['presentation_id'];
+        let slideId = request['slide_id'];
+        let title = request['title'];
+        let content = request['content'];
+
+        db.query('UPDATE slides SET title=($1), content=($2) WHERE presentation_id=($3) AND id=($4)',
+            [title, content, presentationId, slideId],
+            function(err, result) {
+                res.header("Access-Control-Allow-Origin",  "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+                if (err) {
+                    res.send({ error: 'There was an error saving data', success: false });
+                } else {
+                    res.send({ success: true });
+                }
+            });
+    });
 };

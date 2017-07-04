@@ -19,3 +19,21 @@ export function loadSlides(presentationId) {
         });
     };
 }
+
+export function updateSlideSuccess(data) {
+    return {
+        type: types.UPDATE_SLIDE,
+        data
+    };
+}
+
+export function updateSlide(data) {
+    return function(dispatch) {
+        return slideApi.updateSlide(data).then(res=>res.json()).then(res => {
+            if(res.success === true)
+                dispatch(updateSlideSuccess(data));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}

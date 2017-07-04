@@ -6,7 +6,6 @@ export default function authorReducer(state = [], action) {
         case types.LOAD_PRESENTATIONS_SUCCESS:
             var result = action.presentations;
             console.log('STATE', state);
-            console.log('ACTION', action);
             console.log('LOAD_PRESENTATIONS_SUCCESS', result);
             return result;
 
@@ -22,13 +21,33 @@ export default function authorReducer(state = [], action) {
             return result;
 
         case types.GET_SLIDES:
-            let presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
-            console.log('presentationWithSlide', presentationWithSlide);
+            var presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
+
             presentationWithSlide.slides = action.slides;
             var result = [
                     ...state.filter(presentation => presentation.id !== action.presentationId),
                 Object.assign({}, presentationWithSlide)
                 ]
+            console.log('STATE', state);
+            console.log('GET_SLIDES', result);
+            return result;
+
+        case types.UPDATE_SLIDE:
+            let data = action.data;
+            var presentationWithSlide = state.filter(presentation => presentation.id == data.presentation_id)[0];
+
+            presentationWithSlide.slides.forEach(function(slide) {
+                if(slide.id === data.slide_id) {
+                    slide.title = data.title;
+                    slide.content = data.content;
+                }
+
+            });
+
+            var result = [
+                ...state.filter(presentation => presentation.id !== data.presentation_id),
+                Object.assign({}, presentationWithSlide)
+            ]
             console.log('STATE', state);
             console.log('GET_SLIDES', result);
             return result;
