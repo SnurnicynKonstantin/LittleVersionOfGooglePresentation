@@ -20,6 +20,19 @@ class SlideApi {
                   '&content=' + data.content
         });
     }
+
+    static createSlide(data) {
+        console.log('data', data);
+        return fetch(serverApi + '/slides', {
+            method: "POST",
+            headers: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            body: 'presentation_id=' + data.presentation_id +
+            '&title=' + data.title +
+            '&content=' + data.content
+        });
+    }
 }
 
 export default SlideApi;

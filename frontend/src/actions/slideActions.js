@@ -2,7 +2,6 @@ import slideApi from '../api/slideApi';
 import * as types from './actionTypes';
 
 export function getSlides(slides, presentationId) {
-    console.log('Slides', slides);
     return {
         type: types.GET_SLIDES,
         slides,
@@ -20,18 +19,22 @@ export function loadSlides(presentationId) {
     };
 }
 
-export function updateSlideSuccess(data) {
-    return {
-        type: types.UPDATE_SLIDE,
-        data
-    };
-}
-
 export function updateSlide(data) {
     return function(dispatch) {
         return slideApi.updateSlide(data).then(res=>res.json()).then(res => {
             if(res.success === true)
-                dispatch(updateSlideSuccess(data));
+                dispatch(loadSlides(data.presentation_id));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}
+
+export function createSlide(data) {
+    return function(dispatch) {
+        return slideApi.createSlide(data).then(res=>res.json()).then(res => {
+            if(res.success === true)
+                dispatch(loadSlides(data.presentation_id));
         }).catch(error => {
             throw(error);
         });

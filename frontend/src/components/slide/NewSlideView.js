@@ -1,14 +1,13 @@
 import React , { PropTypes, Component } from 'react';
-import { Link } from 'react-router'
 
-class SlideView extends Component {
+class NewSlideView extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            title: this.props.slide.title,
-            content: this.props.slide.content
+            title: '',
+            content: ''
         };
 
         this.titleChange = this.titleChange.bind(this);
@@ -16,15 +15,8 @@ class SlideView extends Component {
         this.contentChange = this.contentChange.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({title: nextProps.slide.title});
-        this.setState({content: nextProps.slide.content});
-    }
-
     titleChange(event) {
-        console.log(event.target.value);
         this.setState({title: event.target.value});
-        console.log('state', this.state);
     }
 
     contentChange(event) {
@@ -32,7 +24,9 @@ class SlideView extends Component {
     }
 
     handleSubmit(event) {
-        this.props.changeSlideHandler(this.state.title, this.state.content, this.props.slide.id);
+        this.props.changeSlideHandler(this.state.title, this.state.content);
+        this.setState({title: ''});
+        this.setState({content: ''});
         event.preventDefault();
     }
 
@@ -47,7 +41,6 @@ class SlideView extends Component {
                             className="form-control"
                             id="subject"
                             placeholder="Title"
-                            value={this.state.title}
                             onChange={this.titleChange}
                         />
                     </div>
@@ -58,21 +51,14 @@ class SlideView extends Component {
                             className="form-control"
                             id="subject"
                             placeholder="Content"
-                            value={this.state.content}
                             onChange={this.contentChange}
                         />
                     </div>
-                    <input type="submit" className="btn btn-default" value="Change" />
-                    <button
-                        className="btn btn-danger"
-                        type="button"
-                        onClick={this.props.deleteSlideHandler.bind(this, this.props.slide.id)}>
-                        Delete
-                    </button>
+                    <input type="submit" className="btn btn-default" value="Create" />
                 </form>
             </div>
         );
     }
 }
 
-export default SlideView;
+export default NewSlideView;

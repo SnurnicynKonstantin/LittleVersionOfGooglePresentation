@@ -4,12 +4,13 @@ import * as slideActions from '../actions/slideActions';
 import {bindActionCreators} from 'redux';
 import SlideList from '../components/slide/SlideList';
 import SlideView from '../components/slide/SlideView';
+import NewSlideView from '../components/slide/NewSlideView';
 
 class SlidesContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {currentSlideId: 1};
+        this.state = {currentSlideId: 'new'};
         let { dispatch } = this.props;
         this.actions = bindActionCreators(slideActions, dispatch);
     }
@@ -32,21 +33,45 @@ class SlidesContainer extends React.Component {
         this.actions.updateSlide(data);
     }
 
+    deleteSlideHandler(id){
+        console.log(id);
+        // this.actions.deleteSlide(id);
+    }
+
+    newSlideHandler(title, content){
+        let data = {
+            title: title,
+            content: content,
+            presentation_id: this.props.presentation.id
+        };
+        this.actions.createSlide(data);
+    }
+
     render() {
 
         let subject = this.props.presentation ? this.props.presentation.subject : '';
 
-        let currentSlideId = this.state.currentSlideId
-        let currentSlide = this.props.presentation.slides.filter(function(elem) {
-            return elem.id == currentSlideId;
-        })[0]
+        let result;
+        let currentSlideId = this.state.currentSlideId;
+        if(currentSlideId === 'new') {
+            result = <NewSlideView changeSlideHandler={this.newSlideHandler.bind(this)}/>
+        } else {
+            let currentSlide = this.props.presentation.slides.filter(function(elem) {
+                return elem.id == currentSlideId;
+            })[0]
+            result = <SlideView
+                slide={currentSlide}
+                changeSlideHandler={this.changeSlideHandler.bind(this)}
+                deleteSlideHandler={this.deleteSlideHandler.bind(this)}
+            />
+        }
 
         return (
             <div className="container">
                 <h1>{subject}</h1>
                 <div className="row">
                     <SlideList slides={this.props.presentation.slides} changeSlideId={this.changeCurrentSlideId.bind(this)}/>
-                    <SlideView slide={currentSlide} changeSlideHandler={this.changeSlideHandler.bind(this)}/>
+                    {result}
                 </div>
             </div>
         );

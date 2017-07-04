@@ -40,4 +40,25 @@ module.exports = function(app, db) {
                 }
             });
     });
+
+    app.post('/slides', (req, res) => {
+        var request = req.body;
+
+        console.log(req.body);
+
+        db.query('INSERT INTO slides(title, content, presentation_id) values($1, $2, $3)',
+            [request['title'], request['content'], request['presentation_id']],
+            function(err, result) {
+                res.header("Access-Control-Allow-Origin",  "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+                if (err) {
+                    res.send({ error: 'There was an error saving data', success: false });
+                } else {
+                    res.send({success: true});
+
+                }
+            }
+        );
+    });
 };
