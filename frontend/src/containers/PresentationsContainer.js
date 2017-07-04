@@ -7,7 +7,7 @@ class PresentationsContainer extends React.Component {
     render() {
         let rows = [];
 
-        this.props.presentations.presentations.forEach(function(presentation) {
+        this.props.presentations.forEach(function(presentation) {
             rows.push(<div className="col-lg-4"><PresentationItem
                 presentationInfo={presentation}
                 key={presentation.id}

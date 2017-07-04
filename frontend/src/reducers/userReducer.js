@@ -7,10 +7,7 @@ import mapValues from 'lodash/mapValues';
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case types.ADD_USER_INFO:
-            var result = {
-                ...state,
-                user: Object.assign({}, action.user)
-            }
+            var result = action.user;
             console.log('STATE', state);
             console.log('ADD_USER_INFO', result);
             return result;
