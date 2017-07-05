@@ -32,20 +32,15 @@ export default function authorReducer(state = [], action) {
             console.log('GET_SLIDES', result);
             return result;
 
-        case types.UPDATE_SLIDE:
-            let data = action.data;
-            var presentationWithSlide = state.filter(presentation => presentation.id == data.presentation_id)[0];
+        case types.DELETE_SLIDE:
+            var presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
+            let slidesWithoutDeleted = presentationWithSlide.slides.filter(slide => slide.id !== action.id);
 
-            presentationWithSlide.slides.forEach(function(slide) {
-                if(slide.id === data.slide_id) {
-                    slide.title = data.title;
-                    slide.content = data.content;
-                }
+            presentationWithSlide.slides = slidesWithoutDeleted;
 
-            });
 
             var result = [
-                ...state.filter(presentation => presentation.id !== data.presentation_id),
+                ...state.filter(presentation => presentation.id !== action.presentationId),
                 Object.assign({}, presentationWithSlide)
             ]
             console.log('STATE', state);

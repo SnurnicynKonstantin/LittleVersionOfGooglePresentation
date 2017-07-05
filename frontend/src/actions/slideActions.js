@@ -40,3 +40,24 @@ export function createSlide(data) {
         });
     };
 }
+
+export function deleteSlideSuccess(id, presentationId) {
+    console.log('DELETE');
+    return {
+        type: types.DELETE_SLIDE,
+        id,
+        presentationId
+    };
+}
+
+export function deleteSlide(id, presentationId) {
+    console.log('delete', id);
+    return function(dispatch) {
+        return slideApi.deleteSlide(id).then(res=>res.json()).then(res => {
+            if(res.success === true)
+                dispatch(deleteSlideSuccess(id, presentationId));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}

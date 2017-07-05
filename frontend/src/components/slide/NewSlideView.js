@@ -42,6 +42,7 @@ class NewSlideView extends Component {
                             id="subject"
                             placeholder="Title"
                             onChange={this.titleChange}
+                            value={this.state.title}
                         />
                     </div>
                     <div className="form-group">
@@ -52,6 +53,8 @@ class NewSlideView extends Component {
                             id="subject"
                             placeholder="Content"
                             onChange={this.contentChange}
+                            value={this.state.content}
+
                         />
                     </div>
                     <input type="submit" className="btn btn-default" value="Create" />

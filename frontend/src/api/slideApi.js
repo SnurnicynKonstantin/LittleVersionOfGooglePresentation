@@ -8,7 +8,6 @@ class SlideApi {
     }
 
     static updateSlide(data) {
-        console.log('data', data);
         return fetch(serverApi + '/slides', {
             method: "PUT",
             headers: {
@@ -22,7 +21,6 @@ class SlideApi {
     }
 
     static createSlide(data) {
-        console.log('data', data);
         return fetch(serverApi + '/slides', {
             method: "POST",
             headers: {
@@ -31,6 +29,16 @@ class SlideApi {
             body: 'presentation_id=' + data.presentation_id +
             '&title=' + data.title +
             '&content=' + data.content
+        });
+    }
+
+    static deleteSlide(id) {
+        return fetch(serverApi + '/slides', {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            body: 'id=' + id
         });
     }
 }

@@ -34,8 +34,8 @@ class SlidesContainer extends React.Component {
     }
 
     deleteSlideHandler(id){
-        console.log(id);
-        // this.actions.deleteSlide(id);
+        this.actions.deleteSlide(id, this.props.presentation.id);
+        this.setState({currentSlideId: 'new'})
     }
 
     newSlideHandler(title, content){

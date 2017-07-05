@@ -61,4 +61,25 @@ module.exports = function(app, db) {
             }
         );
     });
+
+    app.delete('/slides', (req, res) => {
+        var request = req.body;
+
+        console.log(req.body);
+
+        db.query('DELETE FROM slides WHERE id=($1)',
+            [request['id']],
+            function(err, result) {
+                res.header("Access-Control-Allow-Origin",  "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+                if (err) {
+                    res.send({ error: 'There was an error delete data', success: false });
+                } else {
+                    res.send({success: true});
+
+                }
+            }
+        );
+    });
 };
