@@ -34,3 +34,21 @@ export function createPresentation(subject, mail) {
         });
     };
 }
+
+export function deletePresentationSuccess(id) {
+    return {
+        type: types.DELETE_PRESENTATION,
+        id
+    };
+}
+
+export function deletePresentation(id) {
+    return function(dispatch) {
+        return presentationApi.deletePresentation(id).then(res=>res.json()).then(res => {
+            if(res.success === true)
+                dispatch(deletePresentationSuccess(id));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}

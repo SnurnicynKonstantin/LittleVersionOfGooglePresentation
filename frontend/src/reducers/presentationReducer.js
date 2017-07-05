@@ -16,8 +16,6 @@ export default function authorReducer(state = [], action) {
                 ]
             console.log('STATE', state);
             console.log('CREATE_PRESENTATIONS_SUCCESS', result);
-            // state.presentations.push({subject:action.subject});
-            // return Object.assign({}, state);
             return result;
 
         case types.GET_SLIDES:
@@ -45,6 +43,14 @@ export default function authorReducer(state = [], action) {
             ]
             console.log('STATE', state);
             console.log('GET_SLIDES', result);
+            return result;
+
+        case types.DELETE_PRESENTATION:
+            var result = [
+                ...state.filter(presentation => presentation.id !== action.id)
+            ]
+            console.log('STATE', state);
+            console.log('DELETE_PRESENTATION', result);
             return result;
 
         default:

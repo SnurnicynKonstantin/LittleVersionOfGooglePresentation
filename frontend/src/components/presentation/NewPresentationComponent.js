@@ -22,7 +22,7 @@ class NewPresentationComponent extends Component {
         const { dispatch } = this.props;
         const actions = bindActionCreators(presentationActions, dispatch);
 
-        actions.createPresentation(this.state.value, this.props.user.user.email);
+        actions.createPresentation(this.state.value, this.props.user.email);
         this.props.history.push('/presentations');
 
         event.preventDefault();

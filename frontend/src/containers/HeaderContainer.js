@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 class HeaderContainer extends React.Component {
 
     onLogoutBtnClick(e) {
+        console.log('Logout');
        // this.props.userActions.logoutUser();
     }
 

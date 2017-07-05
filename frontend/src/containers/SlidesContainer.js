@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as slideActions from '../actions/slideActions';
+import * as presentationActions from '../actions/presentationActions';
 import {bindActionCreators} from 'redux';
 import SlideList from '../components/slide/SlideList';
 import SlideView from '../components/slide/SlideView';
@@ -12,11 +13,12 @@ class SlidesContainer extends React.Component {
         super(props);
         this.state = {currentSlideId: 'new'};
         let { dispatch } = this.props;
-        this.actions = bindActionCreators(slideActions, dispatch);
+        this.slideActions = bindActionCreators(slideActions, dispatch);
+        this.presentationActions = bindActionCreators(presentationActions, dispatch);
     }
 
     componentWillMount() {
-        this.actions.loadSlides(this.props.presentation.id);
+        this.slideActions.loadSlides(this.props.presentation.id);
     }
 
     changeCurrentSlideId(id) {
@@ -30,12 +32,21 @@ class SlidesContainer extends React.Component {
             slide_id: id,
             presentation_id: this.props.presentation.id
         };
-        this.actions.updateSlide(data);
+        this.slideActions.updateSlide(data);
     }
 
     deleteSlideHandler(id){
-        this.actions.deleteSlide(id, this.props.presentation.id);
+        this.slideActions.deleteSlide(id, this.props.presentation.id);
         this.setState({currentSlideId: 'new'})
+    }
+
+    deletePresentationHandler(){
+        this.presentationActions.deletePresentation(this.props.presentation.id);
+        this.props.history.push('/presentations');
+    }
+
+    demonstratePresentationHandler() {
+        this.props.history.push('/demonstration/' + this.props.presentation.id);
     }
 
     newSlideHandler(title, content){
@@ -44,7 +55,7 @@ class SlidesContainer extends React.Component {
             content: content,
             presentation_id: this.props.presentation.id
         };
-        this.actions.createSlide(data);
+        this.slideActions.createSlide(data);
     }
 
     render() {
@@ -68,7 +79,21 @@ class SlidesContainer extends React.Component {
 
         return (
             <div className="container">
-                <h1>{subject}</h1>
+                <h1>
+                    {subject}
+                    <button
+                        className="btn btn-primary"
+                        type="button"
+                        onClick={this.demonstratePresentationHandler.bind(this)}>
+                        Demonstrate
+                    </button>
+                    <button
+                        className="btn btn-danger"
+                        type="button"
+                        onClick={this.deletePresentationHandler.bind(this)}>
+                        Delete presentation
+                    </button>
+                </h1>
                 <div className="row">
                     <SlideList slides={this.props.presentation.slides} changeSlideId={this.changeCurrentSlideId.bind(this)}/>
                     {result}
@@ -87,9 +112,5 @@ function mapStateToProps (state, ownProps) {
         })[0]
     };
 }
-
-//Запрос на получение слайдов
-//Отдаем слайды в SlideList
-//Рядом будет SlideView, по клику на слайд отодбражать его в SlideView
 
 export default connect(mapStateToProps)(SlidesContainer);

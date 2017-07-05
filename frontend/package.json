@@ -22,6 +22,7 @@
     "react-css-modules": "^4.3.0",
     "react-dom": "^15.0.2",
     "react-google-login-component": "^0.7.0",
+    "react-hotkey": "^0.7.0",
     "react-redux": "4.4.5",
     "react-router": "2.4.0",
     "react-router-redux": "4.0.4",

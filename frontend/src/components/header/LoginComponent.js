@@ -15,7 +15,7 @@ class LoginComponent extends Component {
                 </li>
                 {userName ? (
                     <li>
-                        <button type="button" className="btn btn-danger" onClick={this.props.logout()}>Log out</button>
+                        <button type="button" className="btn btn-danger" onClick={this.props.logout}>Log out</button>
                     </li>
                 ) : (
                     <li>
