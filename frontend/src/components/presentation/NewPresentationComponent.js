@@ -33,13 +33,15 @@ class NewPresentationComponent extends Component {
         return (
             <div className="container">
                 <h1> Create new presentation</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label>Subject</label>
-                        <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
-                    </div>
-                    <input type="submit" className="btn btn-default" value="Create" />
-                </form>
+                <div className="col-md-4">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label>Subject</label>
+                            <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
+                        </div>
+                        <input type="submit" className="btn btn-default" value="Create" />
+                    </form>
+                </div>
             </div>
         );
     }

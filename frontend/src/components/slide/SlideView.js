@@ -61,7 +61,7 @@ class SlideView extends Component {
                     </div>
                     <input type="submit" className="btn btn-default" value="Change" />
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-danger indentation"
                         type="button"
                         onClick={this.props.deleteSlideHandler.bind(this, this.props.slide.id)}>
                         Delete

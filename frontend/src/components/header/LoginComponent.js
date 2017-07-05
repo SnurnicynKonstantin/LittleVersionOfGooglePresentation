@@ -15,13 +15,13 @@ class LoginComponent extends Component {
                 </li>
                 {userName ? (
                     <li>
-                        <button type="button" className="btn btn-danger" onClick={this.props.logout}>Log out</button>
+                        <button type="button" className="btn btn-danger logout-btn" onClick={this.props.logout}>Log out</button>
                     </li>
                 ) : (
                     <li>
                         <GoogleLogin socialId="974978258856-arqfdldlm48f2v0ghvmqn7cs3ld511jd.apps.googleusercontent.com"
                              scope="profile"
-                             class="btn btn-danger"
+                             class="btn btn-danger logout-btn"
                              responseHandler={this.props.responseHandler}
                              buttonText="Login With Google"/>
                     </li>

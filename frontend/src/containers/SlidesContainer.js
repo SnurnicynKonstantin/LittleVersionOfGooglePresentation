@@ -82,13 +82,13 @@ class SlidesContainer extends Component {
                 <h1>
                     {subject}
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary indentation"
                         type="button"
                         onClick={this.demonstratePresentationHandler.bind(this)}>
                         Demonstrate
                     </button>
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-danger indentation"
                         type="button"
                         onClick={this.deletePresentationHandler.bind(this)}>
                         Delete presentation
