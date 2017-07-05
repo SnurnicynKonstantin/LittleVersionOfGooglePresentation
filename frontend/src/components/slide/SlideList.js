@@ -1,8 +1,8 @@
-import React from 'react';
+import React , { PropTypes, Component } from 'react';
 import SlideItem from './SlideItem';
 import NewSlideItem from './NewSlideItem';
 
-class SlideList extends React.Component {
+class SlideList extends Component {
 
     render() {
 
@@ -32,5 +32,9 @@ class SlideList extends React.Component {
     }
 }
 
+SlideList.propTypes = {
+    changeSlideId: PropTypes.object.isRequired,
+    slides: PropTypes.object.isRequired
+};
 
 export default SlideList;

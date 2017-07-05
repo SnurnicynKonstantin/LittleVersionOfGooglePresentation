@@ -22,7 +22,7 @@ class NewPresentationComponent extends Component {
         const { dispatch } = this.props;
         const actions = bindActionCreators(presentationActions, dispatch);
 
-        actions.createPresentation(this.state.value, this.props.user.user.email);
+        actions.createPresentation(this.state.value, this.props.user.email);
         this.props.history.push('/presentations');
 
         event.preventDefault();
@@ -33,17 +33,25 @@ class NewPresentationComponent extends Component {
         return (
             <div className="container">
                 <h1> Create new presentation</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <label for="exampleInputEmail1">Subject</label>
-                        <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
-                    </div>
-                    <input type="submit" className="btn btn-default" value="Create" />
-                </form>
+                <div className="col-md-4">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <label>Subject</label>
+                            <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
+                        </div>
+                        <input type="submit" className="btn btn-default" value="Create" />
+                    </form>
+                </div>
             </div>
         );
     }
 }
+
+NewPresentationComponent.propTypes = {
+    history: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired
+};
 
 function mapStateToProps (state) {
     return {

@@ -16,6 +16,16 @@ class PresentationApi {
             body: 'user_mail=' + userMail + '&subject=' + subject
         });
     }
+
+    static deletePresentation(id) {
+        return fetch(serverApi + '/presentations', {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            body: 'id=' + id
+        });
+    }
 }
 
 export default PresentationApi;

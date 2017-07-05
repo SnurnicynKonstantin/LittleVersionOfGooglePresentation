@@ -1,5 +1,4 @@
 import React , { PropTypes, Component } from 'react';
-import { Link } from 'react-router'
 
 class NewSlideItem extends Component {
 
@@ -11,5 +10,10 @@ class NewSlideItem extends Component {
         );
     }
 }
+
+NewSlideItem.propTypes = {
+    changeSlideId: PropTypes.object.isRequired
+};
+
 
 export default NewSlideItem;

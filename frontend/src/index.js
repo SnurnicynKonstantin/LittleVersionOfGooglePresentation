@@ -9,6 +9,7 @@ import App from './containers/App';
 import PresentationsContainer from './containers/PresentationsContainer';
 import SlidesContainer from './containers/SlidesContainer';
 import NewPresentationComponent from './components/presentation/NewPresentationComponent';
+import DemonstratePresentationContainer from './containers/DemonstratePresentationContainer';
 import './styles/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
@@ -25,6 +26,7 @@ render(
                 <Route path="presentations/new" component={NewPresentationComponent} />
                 <Route path="presentations/:id" component={SlidesContainer} />
             </Route>
+            <Route path="demonstration/:id" component={DemonstratePresentationContainer} />
         </Router>
     </Provider>,
     document.getElementById('app')

@@ -1,10 +1,6 @@
 module.exports = function(app, db) {
     app.post('/presentations', (req, res) => {
-        // Get user_mail, subject
-        //TO-DO: Unique title
         var request = req.body;
-
-        console.log(req.body);
 
         const query = db.query('SELECT id FROM users WHERE mail = ($1)',
             [request['user_mail']]
@@ -21,14 +17,14 @@ module.exports = function(app, db) {
                          } else {
                              db.query('SELECT MAX(Id) FROM presentations',
                                  function(err, result) {
-                                     res.header("Access-Control-Allow-Origin",  "*");
-                                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-                                     res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-                                     res.send({
-                                         id: result.rows[0].max,
-                                         subject: request['subject'],
-                                         user_id: userId
-                                     });
+                                     sendResponse(
+                                         res,
+                                         {
+                                             id: result.rows[0].max,
+                                             subject: request['subject'],
+                                             user_id: userId
+                                         }
+                                     );
                                  });
                          }
                      }
@@ -47,10 +43,8 @@ module.exports = function(app, db) {
         });
 
         querySelectPresentations.on('end', () => {
-            res.header("Access-Control-Allow-Origin",  "*");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
-            res.send({presentations, success: true});
+            sendResponse(res, {presentations, success: true});
+
         });
 
     });
@@ -72,9 +66,20 @@ module.exports = function(app, db) {
 
     });
 
-    app.delete('/presentation/:subject', (req, res) => {
-        const request = req.params;
-        db.query('DELETE FROM items WHERE id=($1)', [request['subject']]);
+    app.delete('/presentations', (req, res) => {
+        var request = req.body;
+
+        db.query('DELETE FROM presentations WHERE id=($1)',
+            [request['id']],
+            function(err, result) {
+                if (err) {
+                    sendResponse(res, { error: 'There was an error delete data', success: false });
+                } else {
+                    sendResponse(res, {success: true});
+
+                }
+            }
+        );
     });
 
     app.put ('/presentation/:subject', (req, res) => {
@@ -84,3 +89,10 @@ module.exports = function(app, db) {
             [newSubject, oldSubject]);
     });
 };
+
+function sendResponse (res, answer){
+    res.header("Access-Control-Allow-Origin",  "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "DELETE, PUT, UPDATE, HEAD, OPTIONS, GET, POST");
+    res.send(answer);
+}

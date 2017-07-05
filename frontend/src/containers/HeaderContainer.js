@@ -1,12 +1,13 @@
 import React , { Component, PropTypes } from 'react';
 import { GoogleLogin } from 'react-google-login-component';
 import LoginComponent from '../components/header/LoginComponent';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends Component {
 
     onLogoutBtnClick(e) {
-       // this.props.userActions.logoutUser();
+       this.props.userActions.logoutUser();
+       // this.props.history.push('/presentations');
     }
 
     responseGoogle (googleUser) {
@@ -39,6 +40,11 @@ class HeaderContainer extends React.Component {
         );
     }
 }
+
+HeaderContainer.propTypes = {
+    userActions: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
+};
 
 
 export default HeaderContainer;

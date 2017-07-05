@@ -35,7 +35,7 @@ class NewSlideView extends Component {
             <div className="col-md-4">
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label for="Title">Title</label>
+                        <label>Title</label>
                         <input
                             type="text"
                             className="form-control"
@@ -46,7 +46,7 @@ class NewSlideView extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label for="Content">Content</label>
+                        <label>Content</label>
                         <input
                             type="text"
                             className="form-control"
@@ -63,5 +63,10 @@ class NewSlideView extends Component {
         );
     }
 }
+
+NewSlideView.propTypes = {
+    changeSlideHandler: PropTypes.object.isRequired
+};
+
 
 export default NewSlideView;

@@ -1,5 +1,4 @@
 import React , { PropTypes, Component } from 'react';
-import { Link } from 'react-router'
 
 class SlideView extends Component {
 
@@ -22,9 +21,7 @@ class SlideView extends Component {
     }
 
     titleChange(event) {
-        console.log(event.target.value);
         this.setState({title: event.target.value});
-        console.log('state', this.state);
     }
 
     contentChange(event) {
@@ -41,7 +38,7 @@ class SlideView extends Component {
             <div className="col-md-4">
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label for="Title">Title</label>
+                        <label>Title</label>
                         <input
                             type="text"
                             className="form-control"
@@ -52,7 +49,7 @@ class SlideView extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label for="Content">Content</label>
+                        <label>Content</label>
                         <input
                             type="text"
                             className="form-control"
@@ -64,7 +61,7 @@ class SlideView extends Component {
                     </div>
                     <input type="submit" className="btn btn-default" value="Change" />
                     <button
-                        className="btn btn-danger"
+                        className="btn btn-danger indentation"
                         type="button"
                         onClick={this.props.deleteSlideHandler.bind(this, this.props.slide.id)}>
                         Delete
@@ -74,5 +71,11 @@ class SlideView extends Component {
         );
     }
 }
+
+SlideView.propTypes = {
+    slide: PropTypes.object.isRequired,
+    changeSlideHandler: PropTypes.object.isRequired,
+    deleteSlideHandler: PropTypes.object.isRequired
+};
 
 export default SlideView;

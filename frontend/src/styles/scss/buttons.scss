@@ -1,0 +1,8 @@
+.indentation {
+  margin-left: $margin-left-button;
+}
+
+.logout-btn {
+  @extend .indentation;
+  margin-top: 10px;
+}
