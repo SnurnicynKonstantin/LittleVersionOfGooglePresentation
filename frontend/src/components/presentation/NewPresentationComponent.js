@@ -27,15 +27,16 @@ class NewPresentationComponent extends Component {
 
         event.preventDefault();
     }
+
     render() {
 
         return (
             <div className="container">
                 <h1> Create new presentation</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div class="form-group">
+                    <div className="form-group">
                         <label for="exampleInputEmail1">Subject</label>
-                        <input type="text" class="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
+                        <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
                     </div>
                     <input type="submit" className="btn btn-default" value="Create" />
                 </form>
@@ -46,7 +47,7 @@ class NewPresentationComponent extends Component {
 
 function mapStateToProps (state) {
     return {
-        user: state.users
+        user: state.user
     };
 }
 

@@ -5,13 +5,6 @@ import { Link } from 'react-router'
 
 class HeaderContainer extends React.Component {
 
-    static get propTypes() {
-        return {
-            userActions: PropTypes.func.isRequired,
-            actions: PropTypes.func.isRequired
-        };
-    }
-
     onLogoutBtnClick(e) {
        // this.props.userActions.logoutUser();
     }

@@ -3,6 +3,7 @@ import {loadPresentations} from './presentationActions';
 import * as types from './actionTypes';
 
 export function updateUser(user) {
+    console.log('About User', user);
     return {
         type: types.ADD_USER_INFO,
         user

@@ -16,7 +16,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <Header user = {this.props.user.user} actions = {actions} userActions = {userAction}/>
+                <Header user = {this.props.user} actions = {actions} userActions = {userAction}/>
                 <h1>App</h1>
                 {this.props.children}
             </div>
@@ -27,7 +27,7 @@ class App extends React.Component {
 function mapStateToProps (state) {
     console.log("state in App", state);
     return {
-        user: state.users
+        user: state.user
     };
 }
 
