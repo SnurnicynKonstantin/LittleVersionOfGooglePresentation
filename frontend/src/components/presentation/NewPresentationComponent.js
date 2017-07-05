@@ -35,7 +35,7 @@ class NewPresentationComponent extends Component {
                 <h1> Create new presentation</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label for="exampleInputEmail1">Subject</label>
+                        <label>Subject</label>
                         <input type="text" className="form-control" id="subject" placeholder="Subject" onChange={this.handleChange}/>
                     </div>
                     <input type="submit" className="btn btn-default" value="Create" />
@@ -44,6 +44,12 @@ class NewPresentationComponent extends Component {
         );
     }
 }
+
+NewPresentationComponent.propTypes = {
+    history: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired
+};
 
 function mapStateToProps (state) {
     return {

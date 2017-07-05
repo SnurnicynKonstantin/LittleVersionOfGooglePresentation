@@ -1,8 +1,8 @@
-import React from 'react';
+import React , { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import PresentationItem from '../components/presentation/PresentationItemComponent';
 
-class PresentationsContainer extends React.Component {
+class PresentationsContainer extends Component {
 
     render() {
         let rows = [];
@@ -24,6 +24,10 @@ class PresentationsContainer extends React.Component {
         );
     }
 }
+
+PresentationsContainer.propTypes = {
+    presentations: PropTypes.object.isRequired
+};
 
 function mapStateToProps (state) {
     return {

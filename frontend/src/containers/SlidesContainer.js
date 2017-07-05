@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as slideActions from '../actions/slideActions';
 import * as presentationActions from '../actions/presentationActions';
@@ -7,7 +7,7 @@ import SlideList from '../components/slide/SlideList';
 import SlideView from '../components/slide/SlideView';
 import NewSlideView from '../components/slide/NewSlideView';
 
-class SlidesContainer extends React.Component {
+class SlidesContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +22,7 @@ class SlidesContainer extends React.Component {
     }
 
     changeCurrentSlideId(id) {
-        this.setState({currentSlideId: id})
+        this.setState({currentSlideId: id});
     }
 
     changeSlideHandler(title, content, id){
@@ -37,7 +37,7 @@ class SlidesContainer extends React.Component {
 
     deleteSlideHandler(id){
         this.slideActions.deleteSlide(id, this.props.presentation.id);
-        this.setState({currentSlideId: 'new'})
+        this.setState({currentSlideId: 'new'});
     }
 
     deletePresentationHandler(){
@@ -65,16 +65,16 @@ class SlidesContainer extends React.Component {
         let result;
         let currentSlideId = this.state.currentSlideId;
         if(currentSlideId === 'new') {
-            result = <NewSlideView changeSlideHandler={this.newSlideHandler.bind(this)}/>
+            result = <NewSlideView changeSlideHandler={this.newSlideHandler.bind(this)}/>;
         } else {
             let currentSlide = this.props.presentation.slides.filter(function(elem) {
                 return elem.id == currentSlideId;
-            })[0]
+            })[0];
             result = <SlideView
                 slide={currentSlide}
                 changeSlideHandler={this.changeSlideHandler.bind(this)}
                 deleteSlideHandler={this.deleteSlideHandler.bind(this)}
-            />
+            />;
         }
 
         return (
@@ -102,6 +102,13 @@ class SlidesContainer extends React.Component {
         );
     }
 }
+
+SlidesContainer.propTypes = {
+    dispatch: PropTypes.object.isRequired,
+    presentation: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+};
+
 
 function mapStateToProps (state, ownProps) {
     let presentationId = ownProps.params.id;

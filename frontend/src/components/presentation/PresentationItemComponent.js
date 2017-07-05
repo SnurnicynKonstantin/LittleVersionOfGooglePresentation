@@ -1,5 +1,5 @@
 import React , { PropTypes, Component } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 class PresentationItemComponent extends Component {
 
@@ -11,5 +11,9 @@ class PresentationItemComponent extends Component {
         );
     }
 }
+
+PresentationItemComponent.propTypes = {
+    presentationInfo: PropTypes.object.isRequired
+};
 
 export default PresentationItemComponent;

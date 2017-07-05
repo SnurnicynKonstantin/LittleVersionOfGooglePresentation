@@ -13,15 +13,15 @@ export default function authorReducer(state = [], action) {
             ];
 
         case types.GET_SLIDES:
-            var presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
-            presentationWithSlide.slides = action.slides;
+            let updatedPresentation = state.filter(presentation => presentation.id == action.presentationId)[0];
+            updatedPresentation.slides = action.slides;
             return [
                 ...state.filter(presentation => presentation.id !== action.presentationId),
-                Object.assign({}, presentationWithSlide)
+                Object.assign({}, updatedPresentation)
             ];
 
         case types.DELETE_SLIDE:
-            var presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
+            let presentationWithSlide = state.filter(presentation => presentation.id == action.presentationId)[0];
             let slidesWithoutDeleted = presentationWithSlide.slides.filter(slide => slide.id !== action.id);
             presentationWithSlide.slides = slidesWithoutDeleted;
             return [

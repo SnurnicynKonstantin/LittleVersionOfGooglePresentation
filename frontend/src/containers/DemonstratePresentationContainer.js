@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import DemonstratePresentation from '../components/presentation/DemonstratePresentationComponent';
 import hotkey from 'react-hotkey';
@@ -6,15 +6,22 @@ hotkey.activate();
 
 require("!style-loader!css-loader!sass-loader!../styles/scss/App.scss");
 
-class DemonstratePresentationContainer extends React.Component {
+class DemonstratePresentationContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {currentSlideId: 0};
         this.hotkeyHandler = this.handleHotkey.bind(this);
     }
 
+    componentDidMount() {
+        hotkey.addHandler(this.hotkeyHandler);
+    }
+
+    componentWillUnmount() {
+        hotkey.removeHandler(this.hotkeyHandler);
+    }
+
     handleHotkey(e) {
-        console.log("hotkey", e.key);
         let incrementedSlideId = this.state.currentSlideId;
 
         switch (e.key) {
@@ -37,14 +44,6 @@ class DemonstratePresentationContainer extends React.Component {
 
     }
 
-    componentDidMount() {
-        hotkey.addHandler(this.hotkeyHandler);
-    }
-
-    componentWillUnmount() {
-        hotkey.removeHandler(this.hotkeyHandler);
-    }
-
     render() {
         return (
             <div>
@@ -53,6 +52,11 @@ class DemonstratePresentationContainer extends React.Component {
         );
     }
 }
+
+DemonstratePresentationContainer.propTypes = {
+    slides: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+};
 
 function mapStateToProps (state, ownProps) {
     let presentationId = ownProps.params.id;

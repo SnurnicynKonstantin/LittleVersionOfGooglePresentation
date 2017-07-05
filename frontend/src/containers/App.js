@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { PropTypes, Component } from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import Header from './HeaderContainer';
@@ -7,7 +7,7 @@ import * as userActions from '../actions/userActions';
 
 require("!style-loader!css-loader!sass-loader!../styles/scss/App.scss");
 
-class App extends React.Component {
+class App extends Component {
 
     render() {
         const { dispatch } = this.props;
@@ -24,8 +24,13 @@ class App extends React.Component {
     }
 }
 
+App.propTypes = {
+    dispatch: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
+};
+
 function mapStateToProps (state) {
-    console.log("state in App", state);
     return {
         user: state.user
     };

@@ -31,5 +31,11 @@ class LoginComponent extends Component {
     }
 }
 
+LoginComponent.propTypes = {
+    user: PropTypes.object.isRequired,
+    logout: PropTypes.object.isRequired,
+    responseHandler: PropTypes.object.isRequired
+};
+
 
 export default LoginComponent;

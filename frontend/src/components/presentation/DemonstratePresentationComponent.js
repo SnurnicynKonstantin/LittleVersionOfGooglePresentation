@@ -13,5 +13,8 @@ class DemonstratePresentation extends Component {
     }
 }
 
+DemonstratePresentation.propTypes = {
+    currentSlide: PropTypes.object.isRequired
+};
 
 export default DemonstratePresentation;
