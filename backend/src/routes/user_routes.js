@@ -22,17 +22,19 @@ module.exports = function(app, db) {
     app.put('/users', (req, res) => {
         var request = req.body;
 
-        console.log(request['presentation_id']);
-        console.log(request['mail']);
-
-        db.query('UPDATE users SET shared_presentation = array_append(shared_presentation,($1)) WHERE mail=($2)',
+        db.query('UPDATE users SET shared_presentation = array_remove(shared_presentation,($1)) WHERE mail=($2)',
             [request['presentation_id'], request['mail']],
             function(err, result) {
-                if (err) {
-                    sendResponse(res, { error: 'There was an error saving data', success: false });
-                } else {
-                    sendResponse(res, { success: true });
-                }
+                db.query('UPDATE users SET shared_presentation = array_append(shared_presentation,($1)) WHERE mail=($2)',
+                    [request['presentation_id'], request['mail']],
+                    function (err, result) {
+                        if (err) {
+                            sendResponse(res, {error: 'There was an error saving data', success: false});
+                        } else {
+                            sendResponse(res, {success: true});
+                        }
+                    }
+                );
             }
         );
     });
