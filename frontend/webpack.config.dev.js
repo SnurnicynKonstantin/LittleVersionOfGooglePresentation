@@ -32,7 +32,8 @@ export default {
             {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
             {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
             {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
-            {test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"]}
+            {test: /\.scss$/, loaders: ["style-loader", "css-loader", "sass-loader"]},
+            {test: /bootstrap.+\.(jsx|js)$/, loader: 'imports?jQuery=jquery,$=jquery,this=>window'}
         ]
     }
 };

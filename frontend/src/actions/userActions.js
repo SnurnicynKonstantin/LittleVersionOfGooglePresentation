@@ -28,6 +28,20 @@ export function loadUserInfo(token) {
     };
 }
 
+export function dfegdf() {
+    return {
+        type: 'sdfg'
+    };
+}
+
+export function sharePresentation(presentationId, mail) {
+        return userApi.sharePresentation(presentationId, mail).then(res=>res.json()).then(res => {
+            return(res);
+        }).catch(error => {
+            throw(error);
+        });
+}
+
 export function saveUser(mail) {
     return userApi.saveUserMail(mail);
 }

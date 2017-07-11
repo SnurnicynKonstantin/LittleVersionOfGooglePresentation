@@ -10,8 +10,10 @@ import PresentationsContainer from './containers/PresentationsContainer';
 import SlidesContainer from './containers/SlidesContainer';
 import NewPresentationComponent from './components/presentation/NewPresentationComponent';
 import DemonstratePresentationContainer from './containers/DemonstratePresentationContainer';
+window.jQuery = window.$ = require('jquery/dist/jquery.min')
 import './styles/style.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 import '../node_modules/toastr/build/toastr.min.css';
 
 const store = configureStore();

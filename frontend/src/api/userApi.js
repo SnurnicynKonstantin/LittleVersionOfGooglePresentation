@@ -17,6 +17,17 @@ class UserApi {
             body: 'mail=' + mail
         });
     }
+
+    static sharePresentation(presentationId, mail) {
+        return fetch(serverApi + '/users', {
+            method: "PUT",
+            headers: {
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            body: 'presentation_id=' + presentationId +
+            '&mail=' + mail
+        });
+    }
 }
 
 export default UserApi;

@@ -33,19 +33,28 @@ module.exports = function(app, db) {
     });
 
     app.get('/presentations', (req, res) => {
-        var presentations = [];
 
-        const querySelectPresentations = db.query('SELECT * FROM presentations WHERE user_id = ($1)',
-            [req.param("user_id")]);
-
-        querySelectPresentations.on('row', (row) => {
-            presentations.push(JSON.parse(JSON.stringify(row)));
-        });
-
-        querySelectPresentations.on('end', () => {
-            sendResponse(res, {presentations, success: true});
-
-        });
+        let presentations;
+        db.query('SELECT * FROM presentations WHERE user_id = ($1)', [req.param("user_id")],
+            function(err, result) {
+                presentations = result.rows;
+                db.query('SELECT * FROM users WHERE id = ($1)', [req.param("user_id")],
+                    function(err, result) {
+                        let sharedPresentationIds = result.rows[0].shared_presentation;
+                        db.query('SELECT * FROM presentations WHERE id IN (' + sharedPresentationIds.join() + ')',
+                            function(err, result) {
+                                let sharedPresentations = result.rows.map(function(presentation) {
+                                    presentation['shared'] = true;
+                                    return presentation;
+                                });
+                                presentations = presentations.concat(sharedPresentations);
+                                sendResponse(res, {presentations, success: true});
+                            }
+                        );
+                    }
+                );
+            }
+        );
 
     });
 
