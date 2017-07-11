@@ -5,20 +5,31 @@ import PresentationItem from '../components/presentation/PresentationItemCompone
 class PresentationsContainer extends Component {
 
     render() {
-        let rows = [];
+        let presentations = [];
+        let sharedPresentations = [];
 
         this.props.presentations.forEach(function(presentation) {
-            rows.push(<div className="col-lg-4"><PresentationItem
-                presentationInfo={presentation}
-                key={presentation.id}
-            /></div>);
+            if (presentation.shared)
+                sharedPresentations.push(<div className="col-lg-4"><PresentationItem
+                    presentationInfo={presentation}
+                    key={presentation.id}
+                /></div>);
+            else
+                presentations.push(<div className="col-lg-4"><PresentationItem
+                    presentationInfo={presentation}
+                    key={presentation.id}
+                /></div>);
         });
 
         return (
             <div className="container">
                 <h1>Your presentations:</h1>
                 <div className="row">
-                    {rows}
+                    {presentations}
+                </div>
+                <h1>Shared presentations:</h1>
+                <div className="row">
+                    {sharedPresentations}
                 </div>
             </div>
         );
