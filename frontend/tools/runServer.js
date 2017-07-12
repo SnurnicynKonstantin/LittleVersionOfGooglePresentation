@@ -19,10 +19,31 @@ app.get('*', function(req, res) {
     res.sendFile(path.join( __dirname, '../src/index.html'));
 });
 
-app.listen(port, function(err) {
+const server = app.listen(port, function(err) {
     if (err) {
         console.log(err);
     } else {
         open(`http://localhost:${port}`);
     }
+});
+
+const io = require('socket.io')(server);
+var slides = {};
+
+io.on('connection', (socket) => {
+
+    socket.on('room', function(data) {
+        socket.join(data.room);
+        io.sockets.in(data.room).emit('receive current slide', slides[data.room]);
+    });
+
+    socket.on('change slide', function(data) {
+        slides[data.presentation_id] = data;
+        io.sockets.in(data.presentation_id).emit('receive current slide', data);
+    })
+
+    socket.on('init presentation', function(data) {
+        slides[data.presentation_id] = data;
+        io.sockets.in(data.presentation_id).emit('receive current slide', data);
+    })
 });

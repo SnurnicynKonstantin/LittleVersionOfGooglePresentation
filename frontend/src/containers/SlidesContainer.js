@@ -122,6 +122,7 @@ class SlidesContainer extends Component {
                     {shareButton}
                     {deleteButton}
                 </h1>
+                <p>Link to remote viewing: http://localhost:3000/connect/{this.props.presentation.id}</p>
                 <div className="row">
                     <SlideList slides={this.props.presentation.slides} changeSlideId={this.changeCurrentSlideId.bind(this)}/>
                     {result}
