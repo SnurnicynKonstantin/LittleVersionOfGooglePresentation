@@ -1,6 +1,8 @@
 import React , { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import DemonstratePresentation from '../components/presentation/DemonstratePresentationComponent';
+const io = require('socket.io-client');
+const socket = io();
 import hotkey from 'react-hotkey';
 hotkey.activate();
 
@@ -11,6 +13,7 @@ class DemonstratePresentationContainer extends Component {
         super(props);
         this.state = {currentSlideId: 0};
         this.hotkeyHandler = this.handleHotkey.bind(this);
+        socket.emit('init presentation', this.props.slides[0]);
     }
 
     componentDidMount() {
@@ -42,6 +45,7 @@ class DemonstratePresentationContainer extends Component {
                 this.props.history.push('/presentations');
         }
 
+        socket.emit('change slide', this.props.slides[incrementedSlideId]);
     }
 
     render() {
