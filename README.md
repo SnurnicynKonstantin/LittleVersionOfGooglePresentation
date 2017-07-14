@@ -7,7 +7,7 @@ Implement web-application for online presentations (very lite version of google 
 - Client-side: Twitter Bootstrap, React+Redux;
 - Databases: Postgres.
 
-## Functional
+## Functional:
 - Slide consist of title and content;
 - Supporting of text with simple html formatting (bold, italic, underscore, font and size) is enough for text formatting;
 - Application support google authorization and connect created presentations with account;
@@ -16,7 +16,7 @@ Implement web-application for online presentations (very lite version of google 
 - User have ability to share presentations with another google accounts. Such presentations displayed in special list for user;
 - Remote presentation feature. User sends special link to another users and starts presentation. By this link users can see progress of presentation. Use websockets for this feature.
 
-## Technical
+## Technical:
 + Application have RESTful URLS for presentations
   + GET /presentations (/presentations.json) - get all;
   + GET /presentations/:title (/presentations/:title.json) - get one;
